@@ -1,9 +1,11 @@
 # Normalize line endings and enforce LF for key text files
 * text=auto
 
-# Ensure JavaScript and CSS use LF in the repo
-*.js text eol=lf
-*.css text eol=lf
+# Ensure JavaScript and CSS use LF in the repo and declare proper content type
+*.js text eol=lf charset=utf-8 diff=javascript
+*.css text eol=lf charset=utf-8
+*.json text eol=lf charset=utf-8
+*.html text eol=lf charset=utf-8
 
 # Maintain binary files as binary
 *.png binary
