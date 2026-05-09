@@ -9,14 +9,7 @@
   <body>
     <div id="root"></div>
     <script type="module">
-      const isGitHubPages = location.hostname.includes("github.io");
-      const isDocsPath = location.pathname.includes("/docs/");
-
-      if (isGitHubPages && !isDocsPath) {
-        location.replace("./docs/" + location.search + location.hash);
-      } else {
-        import("./src/client-entry.tsx");
-      }
+      import("./src/client-entry.tsx");
     </script>
   </body>
 </html>
