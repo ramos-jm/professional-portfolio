@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "generatedFor": "John Michael C. Ramos",
+    "purpose": "Personalization mapping for automated agent to replace placeholders and transform portfolio content",
+    "date": "2026-05-09"
+  },
+  "globalValues": {
+    "FULL_NAME": "John Michael C. Ramos",
+    "PROFESSIONAL_TITLE": "AI-Driven Full Stack Developer",
+    "SECONDARY_TITLE": "Software Engineer Focused on Intelligent Systems",
+    "TAGLINE": "Making the Impossible Possible",
+    "LOCATION_PRIMARY": "Al Muaihat 1, Ajman, UAE",
+    "LOCATION_SECONDARY": "Jumeirah, Dubai, UAE",
+    "EMAIL": "ramosjohnmichael61@gmail.com",
+    "MOBILE": "+971 56 918 0281",
+    "GITHUB": "https://github.com/ramos-jm",
+    "LINKEDIN": "https://linkedin.com/in/ramos-jm",
+    "INSTAGRAM": "https://instagram.com/jm.__.ramos",
+    "FACEBOOK": "https://facebook.com/iamcharizardd",
+    "HTML_TITLE": "John Michael C. Ramos | AI-Driven Full Stack Developer",
+    "VITE_BASE": "./",
+    "VITE_OUTDIR": "docs",
+    "CV_PATH": "/cv.pdf",
+    "COPYRIGHT_YEAR": "2026",
+    "NAV_BRAND": "jm.ramos",
+    "SITE_VERSION": "portfolio · v2026.1"
+  },
+  "replacements": [
+    {
+      "file": "src/routes/__root.tsx",
+      "type": "meta-fields",
+      "instructions": "Replace meta head values with provided SEO fields and author",
+      "values": {
+        "title": "John Michael C. Ramos | AI-Driven Full Stack Developer",
+        "description": "AI-Driven Full Stack Developer specializing in intelligent systems, computer vision, real-time AI applications, and scalable web technologies.",
+        "author": "John Michael C. Ramos",
+        "og:title": "John Michael C. Ramos | AI-Driven Full Stack Developer",
+        "og:description": "AI-Driven Full Stack Developer specializing in intelligent systems, computer vision, and real-time AI applications.",
+        "twitter:card": "summary_large_image"
+      }
+    },
+    {
+      "file": "index.html",
+      "type": "replace",
+      "match": "<title>Portfolio<\\/title>",
+      "replaceWith": "<title>John Michael C. Ramos | AI-Driven Full Stack Developer<\/title>"
+    },
+    {
+      "file": "src/routes/index.tsx",
+      "type": "content",
+      "instructions": "Replace hero subtitle paragraph and CTA labels. Preserve animations and markup. Update CV link to CV_PATH.",
+      "values": {
+        "hero_tagline": "AI-Driven Full Stack Developer designing intelligent systems, computer vision apps, and real-time AI products.",
+        "cta_selected_work": "Selected work",
+        "cta_download_cv": "Download CV",
+        "cv_path": "/cv.pdf",
+        "ticker_items": [
+          "◐ Real-Time AI",
+          "◑ Computer Vision",
+          "◒ Scalable Systems",
+          "◓ Intelligent Interfaces",
+          "● open to staff roles · 2026",
+          "◐ GTFS · Transit UX",
+          "◑ Postgres · Supabase"
+        ]
+      }
+    },
+    {
+      "file": "src/routes/contact.tsx",
+      "type": "replace-array",
+      "matchKey": "channels",
+      "replaceWith": [
+        { "label": "email", "value": "ramosjohnmichael61@gmail.com", "href": "mailto:ramosjohnmichael61@gmail.com" },
+        { "label": "github", "value": "ramos-jm", "href": "https://github.com/ramos-jm" },
+        { "label": "linkedin", "value": "ramos-jm", "href": "https://linkedin.com/in/ramos-jm" },
+        { "label": "x / twitter", "value": "@ramos_jm", "href": "https://x.com/ramos-jm" }
+      ],
+      "contact_overview": "Currently open for staff-level and architect engagements — backend systems, AI infrastructure, and 0→1 products. Reply usually within 24 hours.",
+      "email_subject_template": "Project inquiry — ${name}"
+    },
+    {
+      "file": "src/routes/about.tsx",
+      "type": "replace-blocks",
+      "instructions": "Replace about intro paragraphs, timeline and principles with provided entries.",
+      "values": {
+        "intro_paragraphs": [
+          "I'm John Michael C. Ramos — an AI-driven full stack developer blending systems engineering, computer vision, and product thinking.",
+          "My work spans database design, real-time inference pipelines, and polished user experiences — built to be reliable and maintainable.",
+          "I focus on correctness, latency, and systems that scale while keeping humans and UX at the center of decisions."
+        ],
+        "timeline": [
+          { "y": "2025", "r": "Junior Social Media Executive · WheelFix LLC", "c": "Produced short-form content, managed digital branding, and executed engagement campaigns." },
+          { "y": "2025", "r": "Contractual Application Developer · CARET Solutions Inc.", "c": "Delivered inventory modules and automated validation reducing transaction errors by 60%." },
+          { "y": "2025", "r": "Admin & Digital Content Specialist · Amphibious Surf School", "c": "Led social media marketing and designed promotional materials." },
+          { "y": "2024", "r": "Web Development Team Leader & Intern · Highly Succeed Inc.", "c": "Led 12 interns and shipped React features across multiple client products." }
+        ],
+        "principles": [
+          { "n": "01", "t": "Boring is a feature.", "c": "Choose technologies your future self will thank you for." },
+          { "n": "02", "t": "Latency is a story.", "c": "Every millisecond reflects how much you care about users." },
+          { "n": "03", "t": "Ship the seam.", "c": "The meaningful work happens where systems meet humans." }
+        ]
+      }
+    },
+    {
+      "file": "src/routes/work.tsx",
+      "type": "replace-array",
+      "matchKey": "projects",
+      "replaceWith": [
+        {
+          "year": "2025",
+          "role": "Founder & Lead",
+          "tag": "AI Transit · Komyut-PH",
+          "title": "Komyut-PH — AI Transit Intelligence System",
+          "copy": "A route-first commuting assistant with signboard-first UX, GTFS-compatible routing, and NLP-guided commuter instructions.",
+          "stack": ["React", "Node.js", "TypeScript", "GTFS", "OSM", "Supabase", "PostgreSQL"],
+          "metrics": [["—","In development"]],
+          "highlights": ["Dual-Layer Database Architecture","GTFS-Compatible Routing Layer","Signboard-First UX","Intent Extraction Engine"]
+        },
+        {
+          "year": "2024",
+          "role": "Solo Engineer",
+          "tag": "Computer Vision · RX Reader",
+          "title": "RX Reader — Handwritten Medicine Classifier",
+          "copy": "Real-time web inference using TensorFlow.js to classify handwritten medicine names with a privacy-first, client-side architecture.",
+          "stack": ["React", "TypeScript", "TensorFlow.js", "Python", "Keras"],
+          "metrics": [["94.76%","classification accuracy"]],
+          "highlights": ["Real-Time Inference","Client-Side AI Execution","Privacy-First Architecture"]
+        },
+        {
+          "year": "2023",
+          "role": "Research Engineer",
+          "tag": "AI Healthcare",
+          "title": "Physical Health Monitoring — Multiple AI Solutions",
+          "copy": "Computer vision solutions for injury detection and skin/nail disease classification using YOLO and TensorFlow-based models.",
+          "stack": ["Python","YOLO","OpenCV","TensorFlow"],
+          "metrics": []
+        },
+        {
+          "year": "2023",
+          "role": "Engineer",
+          "tag": "AI Detection",
+          "title": "AuthenText AI",
+          "copy": "Real-time detection platform for AI-generated or manipulated text built on a Node.js backend.",
+          "stack": ["Node.js","Express","AI Detection"],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "file": "src/components/SiteNav.tsx",
+      "type": "replace-values",
+      "values": {
+        "brand": "jm.ramos",
+        "email_link_text": "available · 26",
+        "footer": {
+          "copyright": "© 2026 John Michael C. Ramos",
+          "location": "Al Muaihat 1, Ajman, UAE",
+          "links": {
+            "github": "https://github.com/ramos-jm",
+            "linkedin": "https://linkedin.com/in/ramos-jm",
+            "x": "https://x.com/ramos-jm"
+          }
+        }
+      }
+    },
+    {
+      "file": "package.json",
+      "type": "ensure-scripts",
+      "values": {
+        "scripts": {
+          "dev": "vite dev",
+          "build": "vite build",
+          "build:docs": "vite build",
+          "build:dev": "vite build --mode development",
+          "preview": "vite preview",
+          "preview:docs": "vite preview --port 5000",
+          "lint": "eslint .",
+          "format": "prettier --write ."
+        }
+      }
+    },
+    {
+      "file": "README-AGENT.md",
+      "type": "update-note",
+      "instructions": "This mapping file (MACHINE_MAPPING.json) should be used as the authoritative source of personalization values. Apply replacements atomically and run build verification."
+    }
+  ],
+  "notes": {
+    "applyStrategy": "Perform a dry-run of replacements, then apply changes file-by-file with a single commit. When replacing JS arrays or objects, ensure the replacement is valid JS/TS syntax (JSON is acceptable).",
+    "postActions": [
+      "npm install",
+      "npm run build:docs",
+      "verify docs/index.html exists and loads",
+      "commit and push changes"
+    ]
+  }
+}
