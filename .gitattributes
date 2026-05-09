@@ -1,0 +1,14 @@
+# Normalize line endings and enforce LF for key text files
+* text=auto
+
+# Ensure JavaScript and CSS use LF in the repo
+*.js text eol=lf
+*.css text eol=lf
+
+# Maintain binary files as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.mp4 binary
