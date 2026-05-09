@@ -1,17 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — JM Ramos" },
-      { name: "description", content: "Get in touch with JM Ramos for full-stack engineering, backend systems, and product work." },
-      { property: "og:title", content: "Contact — JM Ramos" },
-      { property: "og:description", content: "Currently taking on staff-level and architect engagements." },
-    ],
-  }),
-  component: Contact,
-});
+export const Route = createFileRoute('/contact')({
+  loader: () => {
+    if (typeof window !== 'undefined') {
+      window.location.replace('/#contact')
+    }
+  },
+  component: () => null,
+})
 
 function Contact() {
   const channels = [

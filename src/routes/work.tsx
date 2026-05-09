@@ -1,17 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
-export const Route = createFileRoute("/work")({
-  head: () => ({
-    meta: [
-      { title: "Work — JM Ramos" },
-      { name: "description", content: "Selected engineering work by JM Ramos: backend systems, apps, and infrastructure." },
-      { property: "og:title", content: "Work — JM Ramos" },
-      { property: "og:description", content: "Selected engineering work — backend, apps, infrastructure." },
-    ],
-  }),
-  component: Work,
-});
+export const Route = createFileRoute('/work')({
+  loader: () => {
+    if (typeof window !== 'undefined') {
+      window.location.replace('/#work')
+    }
+  },
+  component: () => null,
+})
 
 const projects = [
   {

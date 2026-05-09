@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
@@ -10,6 +9,8 @@ import {
 
 import appCss from "../styles.css?url";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
+import HomePage from "@/components/HomePage";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 
 function NotFoundComponent() {
   return (
@@ -110,16 +111,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const progress = useScrollProgress()
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col">
+        <div
+          className="fixed top-0 left-0 z-[60] h-0.5 bg-accent transition-[width] duration-100 ease-out"
+          style={{ width: `${progress * 100}%` }}
+        />
         <SiteNav />
         <main className="flex-1">
-          <Outlet />
+          <HomePage />
         </main>
         <SiteFooter />
       </div>
     </QueryClientProvider>
-  );
+  )
 }

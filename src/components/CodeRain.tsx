@@ -41,8 +41,8 @@ export function CodeRain({ className = "" }: { className?: string }) {
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
 
-      // soft trail (background tone, brand: deep moss)
-      ctx.fillStyle = "rgba(24, 28, 20, 0.10)";
+      // soft trail tuned to deep neutral background
+      ctx.fillStyle = "rgba(3, 3, 3, 0.14)";
       ctx.fillRect(0, 0, w, h);
 
       ctx.font = `${FONT}px "JetBrains Mono", ui-monospace, monospace`;
@@ -52,14 +52,14 @@ export function CodeRain({ className = "" }: { className?: string }) {
         const x = i * FONT;
         const y = drops[i] * FONT;
 
-        // bright leading char (bone)
-        ctx.fillStyle = "rgba(236, 223, 204, 0.85)";
+        // bright leading char
+        ctx.fillStyle = "rgba(241, 239, 236, 0.82)";
         ctx.fillText(ch, x, y);
 
-        // muted trail (moss accent)
-        ctx.fillStyle = "rgba(105, 117, 101, 0.55)";
+        // muted trail using palette accent
+        ctx.fillStyle = "rgba(18, 52, 88, 0.58)";
         ctx.fillText(ch, x, y - FONT);
-        ctx.fillStyle = "rgba(105, 117, 101, 0.25)";
+        ctx.fillStyle = "rgba(18, 52, 88, 0.3)";
         ctx.fillText(ch, x, y - FONT * 2);
 
         drops[i] += speeds[i];
