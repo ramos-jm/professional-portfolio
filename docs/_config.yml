@@ -1,9 +1,0 @@
-# GitHub Pages configuration for proper asset serving
-# Disable Jekyll processing to avoid MIME type issues
-exclude: [node_modules]
-
-# Ensure assets are served as-is
-include: [.nojekyll]
-
-# Set encoding for proper file serving
-encoding: UTF-8
