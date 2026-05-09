@@ -3,11 +3,9 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
+import "../styles.css";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import HomePage from "@/components/HomePage";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
@@ -82,32 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -117,7 +94,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen flex flex-col">
         <div
-          className="fixed top-0 left-0 z-[60] h-0.5 bg-accent transition-[width] duration-100 ease-out"
+          className="fixed top-0 left-0 z-60 h-0.5 bg-accent transition-[width] duration-100 ease-out"
           style={{ width: `${progress * 100}%` }}
         />
         <SiteNav />
