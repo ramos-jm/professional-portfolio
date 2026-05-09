@@ -4,6 +4,17 @@ import { ArrowUpRight } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Terminal as TerminalUI } from "@/components/Terminal";
 
+type Project = {
+  year: string;
+  tag: string;
+  title: string;
+  copy: string;
+  buildLog: string;
+  techStack: readonly string[];
+  github?: string;
+  highlightMetric?: string;
+};
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -49,7 +60,7 @@ const projects = [
     buildLog: "// built before AI slop became mainstream · Node.js backend",
     techStack: ["Node.js", "NLP", "AI Detection", "JavaScript", "Express"],
   },
-] as const;
+] satisfies readonly Project[];
 
 const timeline = [
   {

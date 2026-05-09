@@ -46,14 +46,14 @@ export function Terminal() {
   }, [current]);
 
   return (
-    <div className="font-mono text-[13px] leading-relaxed border border-border bg-card/70 backdrop-blur-sm">
+    <div className="font-mono text-[13px] leading-relaxed border border-border rounded-[10px] bg-card">
       <div className="flex items-center gap-2 border-b border-border px-4 py-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-accent/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-foreground/30" />
+        <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
+        <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
+        <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
         <span className="ml-3 text-muted-foreground text-xs uppercase tracking-widest">~/jm-ramos — zsh</span>
       </div>
-      <div className="p-5 space-y-1 min-h-70">
+      <div className="p-5 space-y-1 min-h-64">
         {done.map((i) => (
           <Line key={i} line={lines[i]} text={lines[i].t} />
         ))}
@@ -76,7 +76,7 @@ function Line({
 }) {
   return (
     <div className="flex gap-2">
-      {line.p && <span className="text-accent/80 select-none w-3">{line.p}</span>}
+      {line.p && <span className="text-muted-foreground select-none w-3">{line.p}</span>}
       {!line.p && <span className="w-3" />}
       <span
         className={`${line.dim ? "text-muted-foreground" : "text-foreground"} ${

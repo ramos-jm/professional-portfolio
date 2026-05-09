@@ -24,7 +24,7 @@ export function HeroBackdrop() {
       />
       <div
         className={`glow-gold absolute h-105 w-105 -right-30 top-[40%] ${mounted ? "animate-drift" : ""}`}
-        style={{ background: "radial-gradient(closest-side, oklch(0.36 0.073 253 / 0.32), transparent 70%)" }}
+        style={{ background: "radial-gradient(closest-side, rgb(215 38 61 / 0.32), transparent 70%)" }}
       />
       <div
         className={`backlight-cyan absolute h-80 w-80 right-[-6%] top-[10%] ${mounted ? "animate-drift" : ""}`}

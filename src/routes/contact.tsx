@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute('/contact')({
   loader: () => {
