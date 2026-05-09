@@ -46,7 +46,7 @@
       "replaceWith": "<title>John Michael C. Ramos | AI-Driven Full Stack Developer<\/title>"
     },
     {
-      "file": "src/routes/index.tsx",
+      "file": "src/components/HomePage.tsx",
       "type": "content",
       "instructions": "Replace hero subtitle paragraph and CTA labels. Preserve animations and markup. Update CV link to CV_PATH.",
       "values": {
@@ -66,7 +66,7 @@
       }
     },
     {
-      "file": "src/routes/contact.tsx",
+      "file": "src/components/HomePage.tsx",
       "type": "replace-array",
       "matchKey": "channels",
       "replaceWith": [
@@ -79,7 +79,7 @@
       "email_subject_template": "Project inquiry — ${name}"
     },
     {
-      "file": "src/routes/about.tsx",
+      "file": "src/components/HomePage.tsx",
       "type": "replace-blocks",
       "instructions": "Replace about intro paragraphs, timeline and principles with provided entries.",
       "values": {

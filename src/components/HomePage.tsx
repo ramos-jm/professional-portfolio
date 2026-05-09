@@ -18,29 +18,36 @@ const projects = [
     year: "2025",
     tag: "ai transit · route intelligence",
     title: "Komyut-PH",
-    copy: "A signboard-first commuting assistant using intelligent routing logic, GTFS-compatible systems, and natural language guidance for commuters in the Philippines.",
-    buildLog: "// status: actively hacking · nights & weekends",
+    copy: "A signboard-first commuting assistant using intelligent routing logic, GTFS-compatible systems, and natural language guidance for commuters in the Philippines. Designed around real commuter pain points with offline-tolerant architecture.",
+    buildLog: "// status: actively hacking · nights & weekends · github.com/ramos-jm/komyut-ph",
+    github: "https://github.com/ramos-jm/komyut-ph",
+    techStack: ["React", "TypeScript", "GTFS", "Node.js", "Routing Logic"],
   },
   {
     year: "2025",
     tag: "computer vision · ai",
     title: "RX Reader",
-    copy: "Real-time medicine name recognition web application powered by TensorFlow.js CNN inference running directly in the browser.",
-    buildLog: "// thesis project that became something real",
+    copy: "Real-time medicine name recognition web app powered by TensorFlow.js CNN inference running directly in the browser — no server, no latency. Thesis project transformed into a real-world AI application.",
+    buildLog: "// 94.76% accuracy · browser-only inference · no backend needed",
+    github: "https://github.com/ramos-jm/rx-reader",
+    highlightMetric: "94.76% accuracy",
+    techStack: ["TensorFlow.js", "React", "Computer Vision", "CNN", "TypeScript"],
   },
   {
     year: "2023",
     tag: "healthcare · machine learning",
     title: "Physical Health Monitoring",
-    copy: "AI-powered injury and skin condition detection system using deep learning and computer vision technologies.",
-    buildLog: "// because hospitals deserve better software",
+    copy: "AI-powered injury and skin condition detection system using deep learning and computer vision. Designed for environments where fast health assessment and intelligent detection matter.",
+    buildLog: "// computer vision · health AI · multi-condition detection",
+    techStack: ["YOLO", "TensorFlow", "Python", "Computer Vision", "Deep Learning"],
   },
   {
     year: "2024",
     tag: "full stack · ai detection",
     title: "AuthenText AI",
-    copy: "Real-time detection platform for AI-generated or manipulated text built on a Node.js backend.",
-    buildLog: "// built before AI slop became a problem",
+    copy: "Real-time AI-generated text detection platform built on a Node.js backend with fast-response architecture and intelligent classification systems.",
+    buildLog: "// built before AI slop became mainstream · Node.js backend",
+    techStack: ["Node.js", "NLP", "AI Detection", "JavaScript", "Express"],
   },
 ] as const;
 
@@ -48,26 +55,32 @@ const timeline = [
   {
     y: "2025",
     r: "Junior Social Media Executive · WheelFix LLC",
-    c: "Produced short-form content, managed digital branding, and executed engagement campaigns.",
+    c: "Produced short-form content, managed digital branding, and executed engagement campaigns for audience growth and engagement optimization.",
     l: "Learned: content velocity matters as much as quality",
   },
   {
     y: "2025",
     r: "Contractual Application Developer · CARET Solutions Inc.",
-    c: "Delivered inventory modules and automated validation reducing transaction errors by 60%.",
+    c: "Delivered inventory modules and automated validation systems that reduced transaction errors by 60% within the first month of deployment.",
     l: "Learned: validation logic saves more time than features",
   },
   {
     y: "2025",
     r: "Admin & Digital Content Specialist · Amphibious Surf School",
-    c: "Led social media marketing and designed promotional materials.",
+    c: "Led social media branding and designed promotional materials for digital engagement and booking visibility.",
     l: "Learned: good design is communication, not decoration",
   },
   {
     y: "2024",
     r: "Web Development Team Leader & Intern · Highly Succeed Inc.",
-    c: "Led 12 interns and shipped React features across multiple client products.",
+    c: "Led a team of 12 interns, developed React.js features across multiple client systems, and coordinated collaborative deployments in Agile workflows.",
     l: "Learned: shipping beats perfecting, always",
+  },
+  {
+    y: "2021–2025",
+    r: "B.S. Computer Science · New Era University",
+    c: "President's Lister (2023–2025). Thesis: RX Reader — browser-based medicine recognition using TensorFlow.js CNN inference.",
+    l: "Learned: academic constraints are just shipping constraints with citations",
   },
 ] as const;
 
@@ -75,8 +88,8 @@ const RAW_FACTS = [
   "taught myself to code before finishing college",
   "can debug faster with lo-fi playing",
   "believes side projects > certifications",
-  "built an AI that reads doctor handwriting for fun",
-  "favorite stack: the one that ships",
+  "built an AI that reads doctor handwriting for a thesis",
+  "favorite stack: React · Node.js · TensorFlow.js · PostgreSQL",
 ] as const;
 
 export default function HomePage() {
@@ -99,9 +112,9 @@ export default function HomePage() {
 
             <CurrentlyDoing />
 
-            <h1 className="font-serif-display text-[clamp(3rem,9vw,8rem)] leading-[0.9] text-foreground">
+            <h1 className="font-serif-display text-[clamp(3rem,9vw,8rem)] leading-[0.9] gradient-title glow-accent">
               John Michael <br />
-              <span className="italic text-accent">Ramos.</span>
+              <span className="italic gradient-title">Ramos.</span>
             </h1>
 
             <p className="mt-8 text-lg md:text-xl max-w-2xl text-muted-foreground">
@@ -127,7 +140,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-4 font-mono text-xs text-muted-foreground flex flex-wrap gap-6">
-              <div>runs on coffee + spite</div>
+              <div>runs on indomitable will + spite</div>
               <div>ajman to anywhere</div>
               <div>GMT+4</div>
             </div>
@@ -145,13 +158,13 @@ export default function HomePage() {
         <div className="flex w-max animate-ticker font-mono text-xs uppercase tracking-widest text-muted-foreground">
           {Array.from({ length: 2 }).map((_, k) => (
             <div key={k} className="flex shrink-0 items-center gap-10 px-6">
-              <span>Real-Time AI Systems</span>
-              <span>Computer Vision</span>
-              <span>Scalable Full Stack Engineering</span>
-              <span>Intelligent Interfaces</span>
-              <span className="text-accent">Open to software engineering opportunities · 2026</span>
-              <span>TensorFlow.js · React</span>
-              <span>GTFS · Route Intelligence</span>
+              <span>◐ Real-Time AI Systems</span>
+              <span>◑ Computer Vision</span>
+              <span>◒ Scalable Full Stack Engineering</span>
+              <span>◓ Intelligent Interfaces</span>
+              <span className="text-accent">● Open to software engineering opportunities · 2026</span>
+              <span>◐ TensorFlow.js · React · Node.js · PostgreSQL</span>
+              <span>◑ GTFS · Route Intelligence · TypeScript</span>
             </div>
           ))}
         </div>
@@ -179,16 +192,18 @@ export default function HomePage() {
           </div>
           <div className="md:col-span-8 space-y-6 text-lg text-muted-foreground">
             <p>
-              I am John Michael C. Ramos, an AI-driven full stack developer blending
+              I'm John Michael C. Ramos — an AI-driven full stack developer blending
               systems engineering, computer vision, and product thinking.
             </p>
             <p>
-              My work spans database design, real-time inference pipelines, and
-              polished user experiences built to be reliable and maintainable.
+              Computer Science graduate from New Era University, where I built AI-powered thesis
+              projects using TensorFlow.js and realized that the best software happens at the
+              intersection of intelligent systems and real-world constraints.
             </p>
             <p>
-              I focus on correctness, latency, and systems that scale while keeping
-              humans and UX at the center of decisions.
+              My work spans database design, real-time inference pipelines, and polished user experiences
+              built to be reliable and maintainable. I focus on correctness, latency, and systems that scale
+              while keeping humans and UX at the center of decisions.
             </p>
             <RawFacts />
           </div>
@@ -257,6 +272,21 @@ export default function HomePage() {
               </h3>
               <p className="text-muted-foreground">{p.copy}</p>
               <div className="font-mono text-xs text-accent/80">{p.buildLog}</div>
+              {p.highlightMetric && (
+                <div className="font-mono text-xs text-secondary font-semibold">
+                  → {p.highlightMetric}
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2 mt-2">
+                {p.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70 rounded-none"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </motion.article>
           ))}
         </div>
@@ -329,7 +359,7 @@ export default function HomePage() {
               <ContactRow
                 label="x / twitter"
                 value="@ramos_jm"
-                href="https://x.com/ramos-jm"
+                href="https://x.com/ramos_jm"
               />
             </ul>
           </div>
@@ -430,6 +460,7 @@ function CurrentlyDoing() {
     "currently: debugging Komyut-PH at 2am",
     "currently: making computers see handwriting",
     "currently: available for hire · ajman, uae",
+    "currently: React · Node.js · TensorFlow.js",
   ];
   const [i, setI] = useState(0);
 

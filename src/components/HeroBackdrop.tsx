@@ -19,8 +19,16 @@ export function HeroBackdrop() {
         className={`glow-gold absolute h-140 w-140 -left-40 -top-40 ${mounted ? "animate-drift-slow" : ""}`}
       />
       <div
+        className={`backlight-indigo absolute h-96 w-96 left-[-8%] top-1/4 ${mounted ? "animate-drift-slow" : ""}`}
+        style={{ opacity: 0.22 }}
+      />
+      <div
         className={`glow-gold absolute h-105 w-105 -right-30 top-[40%] ${mounted ? "animate-drift" : ""}`}
         style={{ background: "radial-gradient(closest-side, oklch(0.36 0.073 253 / 0.32), transparent 70%)" }}
+      />
+      <div
+        className={`backlight-cyan absolute h-80 w-80 right-[-6%] top-[10%] ${mounted ? "animate-drift" : ""}`}
+        style={{ opacity: 0.16 }}
       />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-background to-transparent" />
       <div className="absolute inset-0 scanlines opacity-30 mix-blend-overlay" />

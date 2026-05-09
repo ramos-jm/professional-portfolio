@@ -62,7 +62,7 @@ export function SiteNav() {
               onClick={() => handleScrollTo(it.id)}
               className={`font-mono text-xs uppercase tracking-widest px-3 py-2 border transition ${
                 active === it.id
-                  ? "text-foreground border-accent/60 bg-accent/15 shadow-[0_0_16px_rgba(18,52,88,0.35)]"
+                  ? "text-foreground border-accent/60 bg-accent/15 shadow-[0_0_16px_rgba(18,52,88,0.35)] glow-accent neon-border"
                   : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
               }`}
             >
@@ -102,7 +102,7 @@ export function SiteNav() {
               onClick={() => handleScrollTo(it.id)}
               className={`w-full text-left font-mono text-xs uppercase tracking-widest px-3 py-2 border transition ${
                 active === it.id
-                  ? "text-foreground border-accent/60 bg-accent/15"
+                  ? "text-foreground border-accent/60 bg-accent/15 glow-accent"
                   : "text-muted-foreground border-border/40"
               }`}
             >
@@ -148,7 +148,7 @@ export function SiteFooter() {
         <div className="md:text-right flex md:justify-end gap-4">
           <a className="hover:text-accent" href="https://github.com/ramos-jm">github</a>
           <a className="hover:text-accent" href="https://linkedin.com/in/ramos-jm">linkedin</a>
-          <a className="hover:text-accent" href="https://x.com/ramos-jm">x</a>
+          <a className="hover:text-accent" href="https://x.com/ramos_jm">x</a>
         </div>
       </div>
 
