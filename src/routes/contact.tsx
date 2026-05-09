@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
+import { BASE_PATH } from "@/lib/base-path";
 
 export const Route = createFileRoute('/contact')({
   loader: () => {
     if (typeof window !== 'undefined') {
-      window.location.replace('/#contact')
+      window.location.replace(`${BASE_PATH}/#contact`)
     }
   },
   component: () => null,
