@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const lines = [
-  { p: "$", t: "whoami", d: 30 },
+  { p: "$", t: "who am i", d: 30 },
   { p: ">", t: "john-michael-ramos", d: 18, dim: true },
   { p: "$", t: "cat stack.json", d: 28 },
   { p: ">", t: '{ "backend": ["node","php","python"],', d: 14, dim: true },

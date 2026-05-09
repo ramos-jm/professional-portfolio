@@ -69,14 +69,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    meta: [
+      meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "John Michael C. Ramos | AI-Driven Full Stack Developer" },
-      { name: "description", content: "AI-Driven Full Stack Developer specializing in intelligent systems, computer vision, real-time AI applications, and scalable web technologies." },
+      { title: "John Michael C. Ramos | Developer · Designer · Digital Marketer" },
+      { name: "description", content: "Full-stack developer, social media manager, graphic designer, and QA engineer based in Ajman, UAE. Open to multi-discipline roles in tech and creative industries." },
       { name: "author", content: "John Michael C. Ramos" },
-      { property: "og:title", content: "John Michael C. Ramos | AI-Driven Full Stack Developer" },
-      { property: "og:description", content: "AI-Driven Full Stack Developer specializing in intelligent systems, computer vision, and real-time AI applications." },
+      { property: "og:title", content: "John Michael C. Ramos | Developer · Designer · Digital Marketer" },
+      { property: "og:description", content: "Full-stack developer, social media manager, graphic designer, and QA engineer based in Ajman, UAE. Open to multi-discipline roles in tech and creative industries." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

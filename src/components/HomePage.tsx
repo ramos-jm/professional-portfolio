@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Code, Cpu, Megaphone, Image, ShieldCheck, Film } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Terminal as TerminalUI } from "@/components/Terminal";
 
@@ -62,34 +62,67 @@ const projects = [
   },
 ] satisfies readonly Project[];
 
+// add non-dev project samples
+projects.push(
+  {
+    year: "2025",
+    tag: "social media · brand",
+    title: "WheelFix Digital Brand Refresh",
+    copy: "Managed content calendar, produced short-form video assets, and grew engagement across Instagram and TikTok.",
+    buildLog: "// social · 2025 · content ops",
+    techStack: ["Instagram", "TikTok", "Canva", "Figma"],
+  },
+  {
+    year: "2025",
+    tag: "design · social",
+    title: "Amphibious Surf School Campaign",
+    copy: "Designed promotional materials and ran digital content operations for booking visibility and audience growth.",
+    buildLog: "// design + social · 2025",
+    techStack: ["Figma", "Canva", "Instagram"],
+  },
+  {
+    year: "2025",
+    tag: "qa · validation",
+    title: "CARET Solutions QA Automation",
+    copy: "Designed validation logic and testing workflows that reduced transaction errors by 60% within first month.",
+    buildLog: "// QA · automation · 60% error reduction",
+    techStack: ["Manual Testing", "Test Plans", "PostgreSQL"],
+  }
+);
+
 const timeline = [
   {
     y: "2025",
     r: "Junior Social Media Executive · WheelFix LLC",
+    d: "SOCIAL",
     c: "Produced short-form content, managed digital branding, and executed engagement campaigns for audience growth and engagement optimization.",
     l: "Learned: content velocity matters as much as quality",
   },
   {
     y: "2025",
     r: "Contractual Application Developer · CARET Solutions Inc.",
+    d: "DEV",
     c: "Delivered inventory modules and automated validation systems that reduced transaction errors by 60% within the first month of deployment.",
     l: "Learned: validation logic saves more time than features",
   },
   {
     y: "2025",
     r: "Admin & Digital Content Specialist · Amphibious Surf School",
+    d: "DESIGN",
     c: "Led social media branding and designed promotional materials for digital engagement and booking visibility.",
     l: "Learned: good design is communication, not decoration",
   },
   {
     y: "2024",
     r: "Web Development Team Leader & Intern · Highly Succeed Inc.",
+    d: "DEV",
     c: "Led a team of 12 interns, developed React.js features across multiple client systems, and coordinated collaborative deployments in Agile workflows.",
     l: "Learned: shipping beats perfecting, always",
   },
   {
     y: "2021–2025",
     r: "B.S. Computer Science · New Era University",
+    d: "DEV",
     c: "President's Lister (2023–2025). Thesis: RX Reader — browser-based medicine recognition using TensorFlow.js CNN inference.",
     l: "Learned: academic constraints are just shipping constraints with citations",
   },
@@ -102,6 +135,14 @@ const RAW_FACTS = [
   "built an AI that reads doctor handwriting for a thesis",
   "favorite stack: React · Node.js · TensorFlow.js · PostgreSQL",
 ] as const;
+
+function disciplineFromTag(tag: string) {
+  const t = tag.toLowerCase();
+  if (/social/.test(t) || /brand/.test(t) || /instagram|tiktok/.test(t)) return "SOCIAL";
+  if (/design/.test(t) || /graphic/.test(t)) return "DESIGN";
+  if (/qa|validation|test/.test(t)) return "QA";
+  return "DEV";
+}
 
 export default function HomePage() {
   return (
@@ -118,10 +159,11 @@ export default function HomePage() {
           <div className="md:col-span-7">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6 flex items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-              AI systems engineer
+              Full-Stack Creative · Developer · Digital Marketer
             </div>
 
             <CurrentlyDoing />
+            <DisciplineFilter />
 
             <h1 className="font-serif-display text-[clamp(3rem,9vw,8rem)] leading-[0.9] gradient-title glow-accent">
               John Michael <br />
@@ -129,9 +171,9 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-8 text-lg md:text-xl max-w-2xl text-muted-foreground">
-              I design and build intelligent systems, from AI-powered applications and
-              computer vision tools to scalable web platforms focused on solving
-              real-world problems.
+              I'm not just a developer. I build products, design brands, make content, and
+              ship reliable systems that people can use. Whether it's a polished landing page
+              or a browser-based AI, I care about craft and outcomes.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -169,13 +211,19 @@ export default function HomePage() {
         <div className="flex w-max animate-ticker font-mono text-xs uppercase tracking-widest text-muted-foreground">
           {Array.from({ length: 2 }).map((_, k) => (
             <div key={k} className="flex shrink-0 items-center gap-10 px-6">
-              <span>◐ Real-Time AI Systems</span>
-              <span>◑ Computer Vision</span>
-              <span>◒ Scalable Full Stack Engineering</span>
-              <span>◓ Intelligent Interfaces</span>
-              <span className="text-accent">● Open to software engineering opportunities · 2026</span>
-              <span>◐ TensorFlow.js · React · Node.js · PostgreSQL</span>
-              <span>◑ GTFS · Route Intelligence · TypeScript</span>
+              <span>React</span>
+              <span>Node.js</span>
+              <span>TensorFlow.js</span>
+              <span>PostgreSQL</span>
+              <span>Social Media Strategy</span>
+              <span>Digital Branding</span>
+              <span>Short-Form Content</span>
+              <span>Graphic Design</span>
+              <span>QA & Testing</span>
+              <span>Agile Workflows</span>
+              <span>Campaign Execution</span>
+              <span>Content Creation</span>
+              <span>Team Leadership</span>
             </div>
           ))}
         </div>
@@ -203,18 +251,19 @@ export default function HomePage() {
           </div>
           <div className="md:col-span-8 space-y-6 text-lg text-muted-foreground">
             <p>
-              I'm John Michael C. Ramos — an AI-driven full stack developer blending
-              systems engineering, computer vision, and product thinking.
+              I'm John Michael C. Ramos — I'm not just a developer. I design brands, create
+              short-form content, and ship reliable systems. I like building things people use,
+              and I make sure they work in the messy real world.
             </p>
             <p>
-              Computer Science graduate from New Era University, where I built AI-powered thesis
-              projects using TensorFlow.js and realized that the best software happens at the
-              intersection of intelligent systems and real-world constraints.
+              On the creative side I plan campaigns, produce short-form video assets, and
+              design visual systems that keep a brand consistent across platforms — from
+              Instagram grids to booking promo materials.
             </p>
             <p>
-              My work spans database design, real-time inference pipelines, and polished user experiences
-              built to be reliable and maintainable. I focus on correctness, latency, and systems that scale
-              while keeping humans and UX at the center of decisions.
+              Technically, I build full-stack products and browser AI, design databases and
+              validation logic, and own QA workflows so systems are reliable. I lean on
+              TensorFlow.js, Node.js, React, and solid testing practices to keep things stable.
             </p>
             <RawFacts />
           </div>
@@ -233,8 +282,11 @@ export default function HomePage() {
                 <div className="md:col-span-3 font-mono text-xs uppercase tracking-widest text-accent">
                   {row.y}
                 </div>
-                <div className="md:col-span-4 font-serif-display text-2xl text-foreground">
-                  {row.r}
+                <div className="md:col-span-4 font-serif-display text-2xl text-foreground flex items-center gap-4">
+                  <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">
+                    {row.d}
+                  </span>
+                  <span>{row.r}</span>
                 </div>
                 <div className="md:col-span-5 text-muted-foreground">
                   {row.c}
@@ -242,6 +294,139 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        id="services"
+        data-section="services"
+        className="mx-auto max-w-7xl px-6 py-20 scroll-mt-24"
+      >
+        <div className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">
+          what i can do for you
+        </div>
+        <h3 className="font-serif-display text-4xl mb-8">Services — skills by discipline</h3>
+
+        <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Code className="h-5 w-5 text-accent" />
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Web & AI</div>
+            </div>
+            <div className="font-serif-display text-xl mb-2">Web & AI Development</div>
+            <ul className="text-muted-foreground space-y-2 text-sm">
+              <li>Full-stack apps (React, Node.js, TypeScript)</li>
+              <li>Browser ML & TensorFlow.js</li>
+              <li>API design & database modeling</li>
+              <li>Computer vision prototypes</li>
+            </ul>
+          </div>
+
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Megaphone className="h-5 w-5 text-accent" />
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Social</div>
+            </div>
+            <div className="font-serif-display text-xl mb-2">Social Media Management</div>
+            <ul className="text-muted-foreground space-y-2 text-sm">
+              <li>Campaign strategy & planning</li>
+              <li>Short-form content production</li>
+              <li>Content calendar & operations</li>
+              <li>Platform analytics & growth</li>
+            </ul>
+          </div>
+
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Image className="h-5 w-5 text-accent" />
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Design</div>
+            </div>
+            <div className="font-serif-display text-xl mb-2">Graphic & Visual Design</div>
+            <ul className="text-muted-foreground space-y-2 text-sm">
+              <li>Brand identity & promo assets</li>
+              <li>Social templates & layouts</li>
+              <li>Figma and Canva production</li>
+            </ul>
+          </div>
+
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <ShieldCheck className="h-5 w-5 text-accent" />
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">QA</div>
+            </div>
+            <div className="font-serif-display text-xl mb-2">QA & Software Testing</div>
+            <ul className="text-muted-foreground space-y-2 text-sm">
+              <li>Manual & functional testing</li>
+              <li>Validation logic & automation</li>
+              <li>Test case design & documentation</li>
+            </ul>
+          </div>
+
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <Film className="h-5 w-5 text-accent" />
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Content</div>
+            </div>
+            <div className="font-serif-display text-xl mb-2">Content Creation</div>
+            <ul className="text-muted-foreground space-y-2 text-sm">
+              <li>Short-form video scripting & production</li>
+              <li>Campaign messaging & copywriting</li>
+              <li>Portfolio & documentation writing</li>
+            </ul>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        id="skills"
+        data-section="skills"
+        className="mx-auto max-w-7xl px-6 py-12 scroll-mt-24"
+      >
+        <div className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">skills</div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="glass-card p-6">
+            <div className="font-serif-display text-2xl mb-4">Technical</div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "TypeScript",
+                "React",
+                "Node.js",
+                "TensorFlow.js",
+                "PostgreSQL",
+                "OpenCV",
+              ].map((s) => (
+                <span key={s} className="font-mono text-[11px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="glass-card p-6">
+            <div className="font-serif-display text-2xl mb-4">Creative & Professional</div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Instagram",
+                "TikTok",
+                "Figma",
+                "Canva",
+                "QA Methodologies",
+                "Content Strategy",
+              ].map((s) => (
+                <span key={s} className="font-mono text-[11px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </motion.section>
@@ -275,7 +460,10 @@ export default function HomePage() {
               className="group glass-card elevate-hover p-8 flex flex-col gap-6"
             >
               <div className="flex justify-between items-start font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                <span>{p.tag}</span>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">{disciplineFromTag(p.tag)}</span>
+                  <span>{p.tag}</span>
+                </div>
                 <span>{p.year}</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-serif-display group-hover:text-accent transition">
@@ -302,9 +490,9 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="mt-12 p-6 max-w-sm border border-border bg-card/70 font-mono text-sm">
-          <pre className="whitespace-pre-wrap text-muted-foreground">{
-            `┌─────────────────────────────────────────┐
+        <div className="mt-12 p-6 max-w-sm border border-border bg-card/80 font-mono text-sm">
+          <pre className="whitespace-pre-wrap text-accent bg-background/10 p-3 rounded text-[13px]">{
+`┌─────────────────────────────────────────┐
 │  what I'm not                           │
 │  ─────────────────────────────────────  │
 │  x 10x developer (I just do not stop)  │
@@ -333,8 +521,8 @@ export default function HomePage() {
           Let us build <span className="italic text-accent">something good.</span>
         </h2>
         <p className="mt-2 max-w-2xl text-lg text-muted-foreground">
-          Currently taking on staff-level and architect engagements, backend systems,
-          AI infrastructure, and 0 to 1 products. Reply usually within 24 hours.
+          Open to roles and projects across web development, social media management,
+          graphic design, QA testing, and digital content creation. Based in Ajman, UAE. Remote-friendly.
         </p>
 
         <div className="grid gap-12 md:grid-cols-12 mt-10">
@@ -433,9 +621,9 @@ export default function HomePage() {
 
 function LineKV({ label, value }: { label: string; value: string }) {
   return (
-    <div className="text-muted-foreground">
-      <span className="text-accent">{label}</span>
-      <span>: {value}</span>
+    <div className="text-muted-foreground flex justify-between items-center">
+      <span className="text-accent font-mono text-[11px]">{label}</span>
+      <span className="ml-3 text-foreground font-mono text-[13px]">{value}</span>
     </div>
   );
 }
@@ -472,6 +660,10 @@ function CurrentlyDoing() {
     "currently: making computers see handwriting",
     "currently: available for hire · ajman, uae",
     "currently: React · Node.js · TensorFlow.js",
+    "currently: Social Media Strategy · Campaigns",
+    "currently: Graphic Design & Brand Systems",
+    "currently: QA workflows · validation logic",
+    "currently: short-form content production",
   ];
   const [i, setI] = useState(0);
 
@@ -488,6 +680,35 @@ function CurrentlyDoing() {
           <span>{items[i]}</span>
         </div>
       </div>
+    </div>
+  );
+}
+
+function DisciplineFilter() {
+  const [active, setActive] = useState("All");
+  const items = ["All", "Dev & AI", "Social Media", "Design", "QA"];
+
+  const handle = (it: string) => {
+    setActive(it);
+    const el = document.getElementById("services");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <div className="mt-4 flex gap-3 flex-wrap">
+      {items.map((it) => (
+        <button
+          key={it}
+          onClick={() => handle(it)}
+          className={`font-mono text-[11px] uppercase tracking-widest px-3 py-2 border transition ${
+            active === it
+              ? "text-foreground border-primary/60 bg-primary/15 glow-accent"
+              : "text-muted-foreground border-border/40 hover:text-accent hover:border-accent"
+          }`}
+        >
+          {it}
+        </button>
+      ))}
     </div>
   );
 }
@@ -521,7 +742,7 @@ function RawFacts() {
   return (
     <div ref={ref} className="mt-6 border border-border p-4 bg-card/60">
       <div className="font-mono text-xs text-accent">// raw_facts.txt</div>
-      <div className="mt-2 font-mono text-lg text-secondary h-8">{typed}</div>
+      <div className="mt-2 font-mono text-lg h-8 text-accent">{typed}</div>
     </div>
   );
 }

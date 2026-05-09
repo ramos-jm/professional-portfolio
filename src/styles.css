@@ -300,6 +300,17 @@
     display: inline-block;
   }
 
+  .discipline-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    padding: 4px 8px;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+    background: linear-gradient(180deg, rgba(2,24,43,0.35), rgba(2,24,43,0.6));
+  }
+
   .neon-border {
     box-shadow: 0 0 20px rgb(255 0 255 / 0.16);
     border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);

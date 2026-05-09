@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const items = [
   { id: "hero", label: "index" },
   { id: "about", label: "about" },
+  { id: "services", label: "services" },
   { id: "work", label: "work" },
   { id: "contact", label: "contact" },
 ] as const;
@@ -140,6 +141,7 @@ export function SiteFooter() {
           <div className="mt-4 flex justify-center gap-2 flex-wrap">
             <button className="hover:text-accent" onClick={() => scrollTo("hero")}>index</button>
             <button className="hover:text-accent" onClick={() => scrollTo("about")}>about</button>
+            <button className="hover:text-accent" onClick={() => scrollTo("services")}>services</button>
             <button className="hover:text-accent" onClick={() => scrollTo("work")}>work</button>
             <button className="hover:text-accent" onClick={() => scrollTo("contact")}>contact</button>
           </div>
@@ -153,7 +155,7 @@ export function SiteFooter() {
       </div>
 
       <div className="text-center font-mono text-[10px] text-muted-foreground/40 pb-6">
-        made with coffee, spite, and too many terminal tabs · v2026.1
+        #WebDev #SocialMedia #GraphicDesign #QA #ContentCreation #AI #UAE · made with coffee, spite, and too many terminal tabs · v2026.1
       </div>
     </footer>
   );
