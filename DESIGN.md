@@ -303,6 +303,7 @@ Ocean Blue (#0066FF) + Sunset Orange (#FF6B35)
 
 ### 1. Floating Hero Section
 
+{% raw %}
 ```tsx
 // In HeroBackdrop.tsx or motion variants
 animate={{ 
@@ -310,6 +311,7 @@ animate={{
   transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
 }}
 ```
+{% endraw %}
 
 ### 2. Gradient Text Animation
 
@@ -329,6 +331,7 @@ animate={{
 ### 3. Staggered Element Reveals
 
 Already implemented with Framer Motion! Just verify:
+{% raw %}
 ```tsx
 <motion.div
   initial={{ opacity: 0 }}
@@ -336,6 +339,7 @@ Already implemented with Framer Motion! Just verify:
   transition={{ delay: index * 0.1 }}
 >
 ```
+{% endraw %}
 
 ---
 
