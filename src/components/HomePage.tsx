@@ -490,18 +490,33 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="mt-12 p-6 max-w-sm border border-border bg-card/80 font-mono text-sm">
-          <pre className="whitespace-pre-wrap text-accent bg-background/10 p-3 rounded text-[13px]">{
-`┌─────────────────────────────────────────┐
-│  what I'm not                           │
-│  ─────────────────────────────────────  │
-│  x 10x developer (I just do not stop)  │
-│  x a framework chaser                  │
-│  x available for "quick favors"        │
-│  x building blockchain anything        │
-│  v actually reading your job desc      │
-└─────────────────────────────────────────┘`
-          }</pre>
+        <div className="mt-12 max-w-sm glass-card p-8">
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">
+            what I'm not
+          </div>
+          <div className="space-y-3">
+            {[
+              { label: "10x developer", value: false, note: "I just do not stop" },
+              { label: "a framework chaser", value: false },
+              { label: "available for \"quick favors\"", value: false },
+              { label: "building blockchain anything", value: false },
+              { label: "actually reading your job desc", value: true },
+            ].map((item) => (
+              <div key={item.label} className="flex items-start gap-3">
+                <span className="text-accent font-mono text-sm mt-0.5">
+                  {item.value ? "✓" : "✕"}
+                </span>
+                <div className="flex-1">
+                  <div className="text-foreground text-sm">{item.label}</div>
+                  {item.note && (
+                    <div className="text-muted-foreground text-xs italic mt-1">
+                      {item.note}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
@@ -536,7 +551,7 @@ export default function HomePage() {
               <LineKV label="preferred_opener" value='"hey, I am building X and need..."' />
               <LineKV label="will_ignore" value='"quick question" with 15 follow-up questions' />
               <LineKV label="timezone" value="GMT+4 (UAE)" />
-              <LineKV label="coffee_preference" value="black, no sugar, while reading your brief" />
+              <LineKV label="coffee_preference" value="sorry, I don't drink coffee" />
             </div>
 
             <ul className="space-y-px border-t border-border">
