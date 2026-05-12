@@ -15,6 +15,8 @@ type Project = {
   techStack: readonly string[];
   github?: string;
   highlightMetric?: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 const sectionVariants = {
@@ -26,42 +28,68 @@ const sectionVariants = {
   },
 };
 
+
+
 const projects = [
+
   {
-    year: "2025",
+    year: "2026",
     tag: "ai transit · route intelligence",
     title: "Komyut-PH",
     copy: "A signboard-first commuting assistant using intelligent routing logic, GTFS-compatible systems, and natural language guidance for commuters in the Philippines. Designed around real commuter pain points with offline-tolerant architecture.",
     buildLog: "// status: actively hacking · nights & weekends · github.com/ramos-jm/komyut-ph",
     github: "https://github.com/ramos-jm/komyut-ph",
+    image: "public/assets/komyutph.png",
+    imageAlt: "Preview of Komyut-PH",
     techStack: ["React", "TypeScript", "GTFS", "Node.js", "Routing Logic"],
   },
+
   {
     year: "2025",
     tag: "computer vision · ai",
     title: "RX Reader",
-    copy: "Real-time medicine name recognition web app powered by TensorFlow.js CNN inference running directly in the browser — no server, no latency. Thesis project transformed into a real-world AI application.",
+    copy: "A real-time React & TypeScript application for classifying handwritten medicine names using a CNN with 94.76% accuracy. Model converted to TensorFlow.js for client-side privacy.",
     buildLog: "// 94.76% accuracy · browser-only inference · no backend needed",
     github: "https://github.com/ramos-jm/rx-reader",
     highlightMetric: "94.76% accuracy",
-    techStack: ["TensorFlow.js", "React", "Computer Vision", "CNN", "TypeScript"],
-  },
-  {
-    year: "2023",
-    tag: "healthcare · machine learning",
-    title: "Physical Health Monitoring",
-    copy: "AI-powered injury and skin condition detection system using deep learning and computer vision. Designed for environments where fast health assessment and intelligent detection matter.",
-    buildLog: "// computer vision · health AI · multi-condition detection",
-    techStack: ["YOLO", "TensorFlow", "Python", "Computer Vision", "Deep Learning"],
+    image: "assets/instruction.png",
+    imageAlt: "RX Reader - Medicine Recognition",
+    techStack: ["React.js", "TensorFlow.js"],
   },
   {
     year: "2024",
     tag: "full stack · ai detection",
     title: "AuthenText AI",
-    copy: "Real-time AI-generated text detection platform built on a Node.js backend with fast-response architecture and intelligent classification systems.",
+    copy: "A Node.js platform that detects AI-generated or manipulated text in real-time using advanced APIs to protect content integrity.",
     buildLog: "// built before AI slop became mainstream · Node.js backend",
-    techStack: ["Node.js", "NLP", "AI Detection", "JavaScript", "Express"],
+    github: "https://github.com/ramos-jm/authentext-ai",
+    image: "assets/autest.png",
+    imageAlt: "AuthenText AI - Text Detection",
+    techStack: ["HTML5", "CSS3", "JavaScript", "Node.js", "REST API"],
   },
+  {
+    year: "2023",
+    tag: "e-commerce · full stack",
+    title: "EZPC",
+    copy: "An e-commerce website for PC parts, featuring real-time inventory management, user authentication, and secure backend powered by PHP and SQL.",
+    buildLog: "// e-commerce · inventory management · secure payments",
+    github: "https://github.com/ramos-jm/ezpc",
+    image: "public/assets/home-page.png",
+    imageAlt: "EZPC - E-commerce Platform",
+    techStack: ["HTML5", "CSS3", "JavaScript", "PHP", "SQL"],
+  },
+  {
+    year: "2023",
+    tag: "education · java validation",
+    title: "CodeSculptorPro",
+    copy: "An educational tool built in React that performs lexical, syntax, and semantic checks for Java code to assist beginner programmers.",
+    buildLog: "// java checker · code validation · educational tool",
+    github: "https://github.com/ramos-jm/codesculptorpro",
+    image: "public/assets/Preview.png",
+    imageAlt: "CodeSculptorPro - Java Code Checker",
+    techStack: ["HTML5", "CSS3", "JavaScript", "React.js"],
+  },
+  
 ] satisfies readonly Project[];
 
 // add non-dev project samples
@@ -72,24 +100,12 @@ projects.push(
     title: "WheelFix Digital Brand Refresh",
     copy: "Managed content calendar, produced short-form video assets, and grew engagement across Instagram and TikTok.",
     buildLog: "// social · 2025 · content ops",
+    image: "assets/wheelfix.jpg",
+    imageAlt: "Preview of WheelFix Digital Brand Refresh",
     techStack: ["Instagram", "TikTok", "Canva", "Figma"],
+    github: ""
   },
-  {
-    year: "2025",
-    tag: "design · social",
-    title: "Amphibious Surf School Campaign",
-    copy: "Designed promotional materials and ran digital content operations for booking visibility and audience growth.",
-    buildLog: "// design + social · 2025",
-    techStack: ["Figma", "Canva", "Instagram"],
-  },
-  {
-    year: "2025",
-    tag: "qa · validation",
-    title: "CARET Solutions QA Automation",
-    copy: "Designed validation logic and testing workflows that reduced transaction errors by 60% within first month.",
-    buildLog: "// QA · automation · 60% error reduction",
-    techStack: ["Manual Testing", "Test Plans", "PostgreSQL"],
-  }
+  
 );
 
 const timeline = [
@@ -239,7 +255,6 @@ export default function HomePage() {
               and I make sure they work in the messy real world.
             </p>
             <p>
-              On the creative side I plan campaigns, produce short-form video assets, and
               design visual systems that keep a brand consistent across platforms — from
               Instagram grids to booking promo materials.
             </p>
@@ -435,6 +450,33 @@ export default function HomePage() {
         <div className="grid gap-4 md:grid-cols-2">
           {projects.map((p, index) => (
             <ScrollTiltCard key={p.title} index={index}>
+              <div className="overflow-hidden border border-border/60 bg-background/40">
+                <div className="relative aspect-16/10">
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt ?? `${p.title} preview`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-background/72 via-transparent to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4 flex items-end justify-between gap-3">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-foreground/90">
+                      visual preview
+                    </div>
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-none border border-accent/50 bg-background/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-accent transition hover:bg-accent hover:text-accent-foreground"
+                      >
+                        GitHub
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
               <div className="flex justify-between items-start font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">
@@ -464,6 +506,19 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
+              {p.github && (
+                <div className="pt-2">
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent hover:text-foreground transition"
+                  >
+                    View on GitHub
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              )}
             </ScrollTiltCard>
           ))}
         </div>
