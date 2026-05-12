@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { getLenis } from "@/hooks/useLenis";
@@ -85,6 +85,7 @@ export function SiteNav() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
+          <VelocityBar />
           <a
             href="mailto:ramosjohnmichael61@gmail.com"
             className="premium-button font-mono text-xs uppercase tracking-widest px-3 py-2 text-foreground"
@@ -131,6 +132,92 @@ export function SiteNav() {
         </div>
       </motion.div>
     </header>
+  );
+}
+
+function VelocityBar() {
+  const barRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const currentWidth = useRef(0);
+  const rafRef = useRef<number>(0);
+  const bindRafRef = useRef<number>(0);
+
+  useEffect(() => {
+    let targetWidth = 0;
+    let cleanupScroll: (() => void) | null = null;
+
+    const attachLenis = () => {
+      const lenis = getLenis();
+      if (!lenis) {
+        bindRafRef.current = requestAnimationFrame(attachLenis);
+        return;
+      }
+
+      const handler = ({ velocity }: { velocity: number }) => {
+        targetWidth = Math.min(100, Math.abs(velocity) * 18);
+      };
+
+      lenis.on("scroll", handler);
+      cleanupScroll = () => {
+        lenis.off("scroll", handler);
+      };
+    };
+
+    bindRafRef.current = requestAnimationFrame(attachLenis);
+
+    const tick = () => {
+      currentWidth.current += (targetWidth - currentWidth.current) * 0.1;
+      targetWidth *= 0.88;
+
+      if (barRef.current) {
+        barRef.current.style.width = `${currentWidth.current}%`;
+
+        const r = Math.round((215 * currentWidth.current) / 100);
+        const g = Math.round(255 - (255 * currentWidth.current) / 100);
+        const b = Math.round(209 - (209 * currentWidth.current) / 100);
+        barRef.current.style.backgroundColor = `rgb(${r},${g},${b})`;
+      }
+
+      if (labelRef.current) {
+        labelRef.current.textContent =
+          currentWidth.current > 2 ? `v:${currentWidth.current.toFixed(0)}` : "lenis";
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (cleanupScroll) cleanupScroll();
+      cancelAnimationFrame(bindRafRef.current);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <div
+      className="hidden md:flex items-center gap-2"
+      title="Scroll velocity - powered by Lenis"
+    >
+      <span
+        ref={labelRef}
+        className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 w-8"
+      >
+        lenis
+      </span>
+      <div className="w-16 h-0.5 bg-border rounded-full overflow-hidden">
+        <div
+          ref={barRef}
+          className="h-full rounded-full"
+          style={{
+            width: "0%",
+            backgroundColor: "var(--accent)",
+            willChange: "width, background-color",
+          }}
+        />
+      </div>
+    </div>
   );
 }
 

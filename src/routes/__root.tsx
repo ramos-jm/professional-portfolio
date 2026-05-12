@@ -10,6 +10,7 @@ import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import HomePage from "@/components/HomePage";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { useLenis } from "@/hooks/useLenis";
+import { ScrollSkewWrapper } from "@/components/ScrollSkewWrapper";
 
 function NotFoundComponent() {
   return (
@@ -101,7 +102,9 @@ function RootComponent() {
         />
         <SiteNav />
         <main className="flex-1">
-          <HomePage />
+          <ScrollSkewWrapper>
+            <HomePage />
+          </ScrollSkewWrapper>
         </main>
         <SiteFooter />
       </div>

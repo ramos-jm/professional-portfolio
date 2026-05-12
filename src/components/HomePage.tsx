@@ -210,27 +210,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-secondary/10 overflow-hidden py-3 ticker-mask">
-        <div className="flex w-max animate-ticker font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          {Array.from({ length: 2 }).map((_, k) => (
-            <div key={k} className="flex shrink-0 items-center gap-10 px-6">
-              <span>React</span>
-              <span>Node.js</span>
-              <span>TensorFlow.js</span>
-              <span>PostgreSQL</span>
-              <span>Social Media Strategy</span>
-              <span>Digital Branding</span>
-              <span>Short-Form Content</span>
-              <span>Graphic Design</span>
-              <span>QA & Testing</span>
-              <span>Agile Workflows</span>
-              <span>Campaign Execution</span>
-              <span>Content Creation</span>
-              <span>Team Leadership</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <DynamicTicker />
 
       <motion.section
         variants={sectionVariants}
@@ -757,6 +737,95 @@ function RawFacts() {
       <div className="font-mono text-xs text-accent">// raw_facts.txt</div>
       <div className="mt-2 font-mono text-lg h-8 text-accent">{typed}</div>
     </div>
+  );
+}
+
+function DynamicTicker() {
+  const track1Ref = useRef<HTMLDivElement>(null);
+  const track2Ref = useRef<HTMLDivElement>(null);
+  const durationRef = useRef(40);
+  const positionRef = useRef(0);
+  const lastTimeRef = useRef<number | null>(null);
+  const rafRef = useRef<number>(0);
+
+  const items = [
+    "React",
+    "Node.js",
+    "TensorFlow.js",
+    "PostgreSQL",
+    "Social Media Strategy",
+    "Digital Branding",
+    "Short-Form Content",
+    "Graphic Design",
+    "QA & Testing",
+    "Agile Workflows",
+    "Campaign Execution",
+    "Content Creation",
+    "Team Leadership",
+  ];
+
+  useEffect(() => {
+    const lenis = getLenis();
+    let targetDuration = 40;
+
+    const scrollHandler = ({ velocity }: { velocity: number }) => {
+      const speed = Math.abs(velocity);
+      targetDuration = Math.max(8, 40 - speed * 12);
+    };
+
+    if (lenis) lenis.on("scroll", scrollHandler);
+
+    const tick = (time: number) => {
+      if (!lastTimeRef.current) lastTimeRef.current = time;
+      const delta = time - lastTimeRef.current;
+      lastTimeRef.current = time;
+
+      durationRef.current += (targetDuration - durationRef.current) * 0.05;
+
+      const rate = 100 / (durationRef.current * 1000);
+      positionRef.current -= rate * delta;
+
+      if (positionRef.current <= -50) {
+        positionRef.current += 50;
+      }
+
+      const transform = `translateX(${positionRef.current}%)`;
+      if (track1Ref.current) track1Ref.current.style.transform = transform;
+      if (track2Ref.current) track2Ref.current.style.transform = transform;
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (lenis) lenis.off("scroll", scrollHandler);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  const itemList = (
+    <div className="flex shrink-0 items-center gap-10 px-6">
+      {items.map((item) => (
+        <span key={item}>{item}</span>
+      ))}
+    </div>
+  );
+
+  return (
+    <section className="border-y border-border bg-secondary/10 overflow-hidden py-3 ticker-mask">
+      <div
+        className="flex font-mono text-xs uppercase tracking-widest text-muted-foreground"
+        style={{ width: "200%", willChange: "transform" }}
+      >
+        <div ref={track1Ref} className="flex w-1/2">
+          {itemList}
+        </div>
+        <div ref={track2Ref} className="flex w-1/2">
+          {itemList}
+        </div>
+      </div>
+    </section>
   );
 }
 
