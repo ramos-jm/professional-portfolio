@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { getLenis } from "@/hooks/useLenis";
 
 const items = [
   { id: "hero", label: "index" },
@@ -40,7 +41,18 @@ export function SiteNav() {
 
   const handleScrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!el) return;
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(el, {
+        offset: -80,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     setOpen(false);
   };
 
@@ -125,7 +137,14 @@ export function SiteNav() {
 export function SiteFooter() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!el) return;
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (

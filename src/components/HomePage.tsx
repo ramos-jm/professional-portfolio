@@ -3,6 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, Code, Cpu, Megaphone, Image, ShieldCheck, Film } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { Terminal as TerminalUI } from "@/components/Terminal";
+import { useScrollVelocity } from "@/hooks/useScrollVelocity";
+import { getLenis } from "@/hooks/useLenis";
 
 type Project = {
   year: string;
@@ -147,6 +149,7 @@ function disciplineFromTag(tag: string) {
 export default function HomePage() {
   return (
     <div className="relative">
+      <ScrollBackground />
       <section
         id="hero"
         data-section="hero"
@@ -451,17 +454,12 @@ export default function HomePage() {
 
         <div className="grid gap-4 md:grid-cols-2">
           {projects.map((p, index) => (
-            <motion.article
-              key={p.title}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.55, delay: index * 0.06 }}
-              className="group glass-card elevate-hover p-8 flex flex-col gap-6"
-            >
+            <ScrollTiltCard key={p.title} index={index}>
               <div className="flex justify-between items-start font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">{disciplineFromTag(p.tag)}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 border border-accent/30 text-accent/70">
+                    {disciplineFromTag(p.tag)}
+                  </span>
                   <span>{p.tag}</span>
                 </div>
                 <span>{p.year}</span>
@@ -486,7 +484,7 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-            </motion.article>
+            </ScrollTiltCard>
           ))}
         </div>
 
@@ -759,5 +757,119 @@ function RawFacts() {
       <div className="font-mono text-xs text-accent">// raw_facts.txt</div>
       <div className="mt-2 font-mono text-lg h-8 text-accent">{typed}</div>
     </div>
+  );
+}
+
+// ─── Scroll Velocity Tilt Card ──────────────────────────────────────────────
+function ScrollTiltCard({
+  children,
+  index,
+}: {
+  children: React.ReactNode;
+  index: number;
+}) {
+  const { velocity } = useScrollVelocity();
+  const cardRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Clamp velocity to a subtle tilt range
+  const tilt = isVisible ? Math.max(-2.5, Math.min(2.5, velocity * 1.8)) : 0;
+  const skew = isVisible ? Math.max(-0.8, Math.min(0.8, velocity * 0.6)) : 0;
+
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.55, delay: index * 0.06 }}
+      className="group glass-card elevate-hover p-8 flex flex-col gap-6"
+      style={{
+        transform: `perspective(1200px) rotateX(${tilt}deg) skewY(${skew}deg)`,
+        transition: "transform 0.15s ease-out",
+        willChange: "transform",
+      }}
+    >
+      {children}
+    </motion.article>
+  );
+}
+
+// ─── Scroll-Linked Section Background ───────────────────────────────────────
+function ScrollBackground() {
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const lenis = getLenis();
+    if (!lenis) return;
+
+    // Sections and their associated hue shifts
+    const sections = [
+      { id: "hero", hue: 185, sat: 100 },
+      { id: "about", hue: 210, sat: 80 },
+      { id: "services", hue: 270, sat: 60 },
+      { id: "work", hue: 345, sat: 90 },
+      { id: "contact", hue: 160, sat: 70 },
+    ];
+
+    const handler = ({ scroll }: { scroll: number }) => {
+      if (!bgRef.current) return;
+
+      const winH = window.innerHeight;
+      const totalH = document.documentElement.scrollHeight;
+      const progress = scroll / (totalH - winH);
+
+      // Find which section we're closest to
+      let activeIndex = 0;
+      for (let i = 0; i < sections.length; i++) {
+        const el = document.getElementById(sections[i].id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= winH * 0.5) activeIndex = i;
+      }
+
+      const next = Math.min(activeIndex + 1, sections.length - 1);
+      const current = sections[activeIndex];
+      const nextSection = sections[next];
+
+      // Calculate blend factor between sections
+      const currentEl = document.getElementById(sections[activeIndex].id);
+      if (!currentEl) return;
+      const rect = currentEl.getBoundingClientRect();
+      const factor = Math.max(0, Math.min(1, -rect.top / winH));
+
+      const hue = current.hue + (nextSection.hue - current.hue) * factor;
+      const sat = current.sat + (nextSection.sat - current.sat) * factor;
+      const opacity = 0.04 + progress * 0.03;
+
+      bgRef.current.style.background = `radial-gradient(
+        ellipse 120% 80% at 50% 0%,
+        hsla(${hue}, ${sat}%, 50%, ${opacity}),
+        transparent 70%
+      )`;
+    };
+
+    lenis.on("scroll", handler);
+    return () => lenis.off("scroll", handler);
+  }, []);
+
+  return (
+    <div
+      ref={bgRef}
+      aria-hidden
+      className="pointer-events-none fixed inset-0 z-0 transition-none"
+      style={{ mixBlendMode: "screen" }}
+    />
   );
 }

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=VT323&family=Press+Start+2P&display=swap");
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
+@import "lenis/dist/lenis.css";
 @source "../src";
 
 @custom-variant dark (&:is(.dark *));
@@ -357,4 +358,28 @@
     to   { transform: translateX(-50%); }
   }
   .animate-ticker { animation: ticker 40s linear infinite; }
+
+  /* Lenis scroll enhancements */
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  /* Tilt cards need GPU compositing */
+  .glass-card {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  /* Smooth velocity-driven transforms */
+  .will-change-transform {
+    will-change: transform;
+  }
 }

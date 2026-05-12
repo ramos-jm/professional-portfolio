@@ -1,20 +1,39 @@
 import { useState, useEffect } from 'react'
+import { getLenis } from './useLenis'
 
 export function useScrollProgress() {
   const [progress, setProgress] = useState(0)
+
   useEffect(() => {
-    const update = () => {
+    const updateFromNative = () => {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement
       const denom = scrollHeight - clientHeight
       setProgress(denom > 0 ? scrollTop / denom : 0)
     }
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
+
+    const lenis = getLenis()
+    let lenisHandler: ((event: { progress: number }) => void) | null = null
+
+    if (lenis) {
+      lenisHandler = ({ progress }) => {
+        setProgress(progress)
+      }
+      lenis.on('scroll', lenisHandler)
+    } else {
+      window.addEventListener('scroll', updateFromNative, { passive: true })
+    }
+
+    window.addEventListener('resize', updateFromNative)
+    updateFromNative()
+
     return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      if (lenis && lenisHandler) {
+        lenis.off('scroll', lenisHandler)
+      }
+      window.removeEventListener('scroll', updateFromNative)
+      window.removeEventListener('resize', updateFromNative)
     }
   }, [])
+
   return progress
 }

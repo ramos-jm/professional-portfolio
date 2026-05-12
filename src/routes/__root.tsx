@@ -9,6 +9,7 @@ import "../styles.css";
 import { SiteNav, SiteFooter } from "@/components/SiteNav";
 import HomePage from "@/components/HomePage";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
+import { useLenis } from "@/hooks/useLenis";
 
 function NotFoundComponent() {
   return (
@@ -88,6 +89,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useLenis();
   const progress = useScrollProgress()
 
   return (
