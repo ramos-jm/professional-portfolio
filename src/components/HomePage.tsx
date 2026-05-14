@@ -95,7 +95,7 @@ const projects = [
 // add non-dev project samples
 projects.push(
   {
-    year: "2025",
+    year: "2026",
     tag: "social media · brand",
     title: "WheelFix Digital Brand Refresh",
     copy: "Managed content calendar, produced short-form video assets, and grew engagement across Instagram and TikTok.",
